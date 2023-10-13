@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  @media print {
+    .print {
+      display: none;
+    }
+  }
+
+  table {
+    font-family: system-ui;
+
+  }
+
+  td {
+    padding: 4px;
+    border: solid 1px;
+  }
+
+  .bold {
+    font-weight: 900;
+  }
+
+  input,
+  select {
+    padding: 4px 8px;
+  }
+
+  .result {
+    width: 100%;
+    border-spacing: 0;
+  }
+
+  .result td {
+    border: 0px;
+  }
+</style>
+
+<body dir="rtl">
+  <div style="width: 210mm ;height: 297mm;   margin: auto; display: flex; flex-direction: column;">
+    <img src="header.png" alt="">
+    <hr style="width: 100%;">
+    <form class="print" style="padding: 20px 10px;">
+      <input autocomplete="off" name="name" type="text" placeholder="الاسم">
+      <input autocomplete="off" type="number" name="age" placeholder="السن">
+      <select name="group">
+        <option value="" disabled selected>Blood Group</option>
+        <option value="B">B</option>
+        <option value="A">A</option>
+        <option value="AB">AB</option>
+        <option value="O">O</option>
+      </select>
+      <select name="rh">
+        <option value="" disabled selected>RH</option>
+        <option value="Positive">Positive</option>
+        <option value="Negative">Negative</option>
+      </select>
+      <button id="submit-btn" type="submit">Print</button>
+    </form>
+    <div style="flex-grow: 1;  padding: 10px 20px; ">
+      <div style="display: flex;border-top: 1px solid ;border-bottom: 1px solid;    padding: 8px 0px;">
+        <table style="width: 50%;">
+          <tr>
+            <td style="width: 60px;" class="bold">الاسم</td>
+            <td id="pName">السيد احمد محمد يشسيشصي</td>
+          </tr>
+          <tr>
+            <td style="width: 60px;" class="bold">النوع</td>
+            <td id="pAge">Male , 45Y</td>
+          </tr>
+
+        </table>
+        <table style="width: 50%;">
+          <tr>
+            <td style="width: 100px;" class="bold">الطبيب المعالج</td>
+            <td>OP</td>
+          </tr>
+          <tr>
+            <td style="width: 100px;" class="bold">تاريخ الزيارة</td>
+            <td id="pDate">12-21-22323 33-33</td>
+          </tr>
+        </table>
+      </div>
+      <div dir="ltr">
+        <h3 style="font-style: italic; text-decoration: underline;">Haematology</h3>
+        <table class="result">
+          <tr>
+            <th style="border:solid 1px ; text-align: left; padding-left: 6px; width: 180px;    border-right: 0;">Test
+            </th>
+            <th style="border:solid 1px ; text-align: left; padding-left: 6px;    border-left: 0;">Result</th>
+          </tr>
+          <tr>
+            <td style="font-style: italic; text-decoration: underline ;font-weight: 600;" colspan="2">Hematological
+              Tests</td>
+
+          </tr>
+          <tr>
+            <td style="border-bottom: 1px dotted;">Rh</td>
+            <td id="pRh" style="border-bottom: 1px dotted;">Positive</td>
+          </tr>
+          <tr>
+            <td style="border-bottom: 1px dotted;">Blood Group</td>
+            <td id="pBGroup" style="border-bottom: 1px dotted;">B</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <img src="footer.bmp" alt="">
+  </div>
+  <script>
+
+
+
+    document.querySelector('form').addEventListener("submit", function (e) {
+      e.preventDefault();
+      var formData = new FormData(e.target);
+      var data = Object.fromEntries(formData)
+      pName.innerHTML = 'السيد / ' + data.name
+      pAge.innerHTML = 'Male , ' + data.age + 'Y'
+      pDate.innerHTML = new Date().toLocaleString('en-GB')
+      pRh.innerHTML = data.rh
+      pBGroup.innerHTML = data.group
+      window.print();
+    });
+  </script>
+</body>
+
+</html>
